@@ -10,22 +10,23 @@ APPIMAGETOOL_URL=https://github.com/AppImage/AppImageKit/releases/download/12/ap
 
 BIN ?= ccls bear nvim python3
 HOMES ?= nvim
-HOME_TAR=home.tar.gz
+HOMETAR=space-vim.tar.gz
 
 export ARCH
 export APPIMAGETOOL
+export HOMETAR
 
-all: $(BIN) $(HOME_TAR)
+all: $(BIN) $(HOMETAR)
 
-clean: $(addsuffix -$(ARCH).AppImage-clean,$(BIN)) $(HOME_TAR)-clean
+clean: $(addsuffix -$(ARCH).AppImage-clean,$(BIN)) $(HOMETAR)-clean
 	rm -f $(APPIMAGETOOL)
 
 $(BIN): %: %-$(ARCH).AppImage
 
-$(HOME_TAR):
+$(HOMETAR):
 	$(MAKE) -C home release
 
-$(HOME_TAR)-clean:
+$(HOMETAR)-clean:
 	$(MAKE) -C home clean
 
 %-$(ARCH).AppImage-clean:
