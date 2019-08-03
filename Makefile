@@ -42,6 +42,7 @@ $(HOME_TAR)-clean:
 	echo
 
 $(APPIMAGETOOL):
+	mkdir -p $(OUTDIR)
 	wget -c $(APPIMAGETOOL_URL) -O $(APPIMAGETOOL)
 	chmod +x $(APPIMAGETOOL)
 
