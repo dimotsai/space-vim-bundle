@@ -3,6 +3,7 @@
 NAME=bear
 VERSION=2.4.0
 ARCH ?= x86_64
+DEST ?= $(NAME)-$(ARCH).AppImage
 
 SRCDIR=$(NAME)-$(VERSION)
 APPDIR=$(NAME).AppDir
@@ -35,7 +36,7 @@ release: build
 	ln -sf ../libear.so $(APPDIR)/usr/lib/x86_64-linux-gnu/libear.so
 	ln -sf ../../lib32/libear.so $(APPDIR)/usr/lib/i386-linux-gnu/libear.so
 	ln -sf lib $(APPDIR)/usr/lib64
-	$(APPIMAGETOOL) $(APPDIR)
+	$(APPIMAGETOOL) $(APPDIR) $(DEST)
 
 clean:
 	rm -rf $(APPDIR)
@@ -43,4 +44,4 @@ clean:
 	rm -rf build32
 	rm -rf build64
 	rm -f $(ICON)
-	rm -f $(NAME)-$(ARCH).AppImage
+	rm -f $(DEST)

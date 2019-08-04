@@ -4,6 +4,7 @@ NAME=ccls
 VERSION=0.20190314.1
 ARCH ?= x86_64
 SHELL:=/bin/bash
+DEST ?= $(NAME)-$(ARCH).AppImage
 
 getdep = $(shell ldd $(1) | grep $(2) | awk '{ print $$3 }')
 
@@ -40,7 +41,7 @@ release: build
 	patchelf --force-rpath --set-rpath '$$ORIGIN/../lib' $(APPDIR)/usr/bin/ccls
 	for lib in $(APPDIR)/usr/lib/*; do patchelf --set-rpath '$$ORIGIN' $$lib; done
 	ln -sf usr/bin/ccls $(APPDIR)/AppRun
-	$(APPIMAGETOOL) $(APPDIR)
+	$(APPIMAGETOOL) $(APPDIR) $(DEST)
 
 clean:
 	rm -rf $(APPDIR)
@@ -50,4 +51,5 @@ clean:
 	rm -f $(ICON)
 	rm -f clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
 	rm -f $(NAME)-$(ARCH).AppImage
+	rm -f $(DEST)
 

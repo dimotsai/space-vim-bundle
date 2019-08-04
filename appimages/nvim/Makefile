@@ -3,9 +3,10 @@
 NAME=nvim
 VERSION=0.3.8
 ARCH ?= x86_64
+DEST ?= $(NAME)-$(ARCH).AppImage
 
 APPURL=https://github.com/neovim/neovim/releases/download/v$(VERSION)/nvim.appimage
-APPIMG=nvim-$(ARCH).AppImage
+APPIMG=$(DEST)
 
 build: fetch
 

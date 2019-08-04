@@ -1,25 +1,23 @@
-.PHONY: build release clean
+.PHONY: build clean
 
-HOMEDIR=output
-HOMEPATH=$(shell pwd)/$(HOMEDIR)
-HOMETAR ?= space-vim.tar.gz
-LOCALDIR=.local
-LOCALPATH=$(HOMEPATH)/$(LOCALDIR)
-APPSPATH ?= $(shell pwd)/../Applications
+HOMEDIR   ?= output
+HOMEPATH   = $(shell pwd)/$(HOMEDIR)
+LOCALDIR   = .local
+LOCALPATH  = $(HOMEPATH)/$(LOCALDIR)
+APPSPATH  ?= $(shell pwd)/apps
+
+PRODUCTS   = .cache .config .fzf go .LfCache .local .space-vim .spacevim .vim
 
 build:
 	mkdir -p $(LOCALPATH)/bin
+	cp template/.spacevim $(HOMEPATH)/.spacevim
 	for bin in $(APPSPATH)/*; do ln -sf $$bin $(LOCALPATH)/bin/$$(basename $${bin%%-$(ARCH).AppImage}); done
 	export HOME=$(HOMEPATH); \
 	export PATH=$(LOCALPATH)/bin:$$PATH; \
 	./build.sh
-	rm -f $(HOMEPATH)/.fzf.{bash,zsh} $(HOMEPATH)/{.bashrc,.zshrc}
-	rm -f $(HOMEPATH)/.local/bin/*
-
-release: build
-	tar -cf $(HOMETAR) $(HOMEDIR)
 
 clean:
-	chmod -R u+w $(HOMEPATH)
-	rm -rf $(HOMEPATH)
-	rm -f $(HOMETAR)
+	if [ -d "$(HOMEPATH)" ]; then \
+		chmod -R u+w $(HOMEPATH);\
+	fi
+	rm -rf $(addprefix $(HOMEPATH)/,$(PRODUCTS))
