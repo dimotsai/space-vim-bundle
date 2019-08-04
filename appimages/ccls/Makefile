@@ -36,7 +36,7 @@ release: build
 	install -D -m 644 $(ICON) $(APPDIR)/$(ICON)
 	install -D -m 755 Release/ccls $(APPDIR)/usr/bin/ccls
 	install -D -m 644 $(call getdep,Release/ccls,libstdc++.so) $(APPDIR)/usr/lib
-	install -D -m 644 $(call getdep,Release/ccls,libncursesw.so) $(APPDIR)/usr/lib
+	install -D -m 644 $(call getdep,Release/ccls,libncursesw.so) $(call getdep,Release/ccls,libtinfo.so) $(APPDIR)/usr/lib
 	install -D -m 644 $(call getdep,Release/ccls,libgcc_s.so) $(APPDIR)/usr/lib
 	patchelf --force-rpath --set-rpath '$$ORIGIN/../lib' $(APPDIR)/usr/bin/ccls
 	for lib in $(APPDIR)/usr/lib/*; do patchelf --set-rpath '$$ORIGIN' $$lib; done

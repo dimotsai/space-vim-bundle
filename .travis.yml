@@ -1,23 +1,37 @@
 sudo: required
 
-services:
-- docker
+dist: bionic
 
-arch:
-  repos:
-  - archlinuxfr=http://repo.archlinux.fr/$arch
-  packages:
-  - fuse2
-  - wget
-  - gcc
-  - make
-  - cmake
-  - patchelf
-  - lib32-gcc-libs
-  - ncurses
-  - ncurses5-compat-libs
-  script:
-  - "make"
+addons:
+  apt:
+    sources:
+    packages:
+      - build-essential
+      - make
+      - cmake
+      - patchelf
+      - gcc-multilib
+      - libncurses-dev
+      - zlib1g-dev
+
+services:
+  - docker
+
+# arch:
+  # repos:
+    # - archlinuxfr=http://repo.archlinux.fr/$arch
+  # packages:
+    # - fuse2
+    # - wget
+    # - gcc
+    # - make
+    # - cmake
+    # - patchelf
+    # - lib32-gcc-libs
+    # - ncurses
+    # - ncurses5-compat-libs
+  # script:
+    # - "make"
 
 script:
-- "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
+  - "make"
