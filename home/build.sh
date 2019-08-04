@@ -30,8 +30,8 @@ python3 ./plug-parser.py $(find ~/.space-vim/layers -name 'packages.vim') >> $PL
 echo "call plug#end()" >> $PLUGS_VIM
 mkdir -p $(dirname $NVIMRC)
 [ ! -f $NVIMRC ] && ln -sf $INIT_VIM $NVIMRC
-nvim -u $PLUGS_VIM +'PlugInstall' +qall
-nvim +'PlugInstall' +qall
+nvim -u $PLUGS_VIM +'set nomore' +'PlugInstall' +qall
+nvim +'PlugInstall' +'set nomore' +qall
 
 # clean up
 python3 -m pip uninstall -y lark-parser
