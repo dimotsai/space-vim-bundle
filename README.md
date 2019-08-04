@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/dimotsai/space-vim.bundle.svg?branch=master)](https://travis-ci.org/dimotsai/space-vim.bundle)
 
 This project would build all essential packages for space-vim and pack them
 as a standalone tarball that could be installed offline.
