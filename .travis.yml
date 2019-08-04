@@ -2,18 +2,6 @@ sudo: required
 
 dist: bionic
 
-addons:
-  apt:
-    sources:
-    packages:
-      - build-essential
-      - make
-      - cmake
-      - patchelf
-      - gcc-multilib
-      - libncurses-dev
-      - zlib1g-dev
-
 services:
   - docker
 
@@ -32,6 +20,22 @@ services:
     # - ncurses5-compat-libs
   # script:
     # - "make"
+    #
+
+before_install:
+  - sudo add-apt-repository ppa:longsleep/golang-backports -y
+  - sudo apt update -q
+  - sudo apt install -y build-essential
+  - sudo apt install -y make
+  - sudo apt install -y cmake
+  - sudo apt install -y patchelf
+  - sudo apt install -y gcc-multilib
+  - sudo apt install -y libncurses-dev
+  - sudo apt install -y zlib1g-dev
+  - sudo apt install -y golang-go
+  # - sudo apt install -y python3
+  # - sudo apt install -y python3-pip
+  # - sudo pip3 install lark-parser
 
 script:
   - "make"

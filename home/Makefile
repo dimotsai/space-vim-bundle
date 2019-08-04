@@ -9,6 +9,7 @@ APPSPATH  ?= $(shell pwd)/apps
 PRODUCTS   = .cache .config .fzf go .LfCache .local .space-vim .spacevim .vim
 BASH      := $(shell which bash)
 ENVRUN    := env - HOME=$(HOMEPATH) $(BASH) --noprofile --norc -l
+SHELL     := $(BASH)
 
 build:
 	mkdir -p $(LOCALPATH)/bin

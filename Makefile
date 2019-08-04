@@ -27,9 +27,9 @@ all: $(BIN) $(HOMETAR)
 clean: $(BIN_CLEAN) $(HOMETAR)-clean $(APPIMAGETOOL)-clean
 
 $(BIN): %: $(APPSPATH)/%-$(ARCH).AppImage
-	rm -rf $(APPSPATH)
 
 $(BIN_CLEAN): %-clean: $(APPSPATH)/%-$(ARCH).AppImage-clean
+	rm -rf $(APPSPATH)
 	rm -rf $(OUTDIR)
 
 home: $(HOMETAR)
