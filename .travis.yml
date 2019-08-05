@@ -7,6 +7,7 @@ arch:
   repos:
   - papyros=http://dash.papyros.io/repos/$repo/$arch
   packages:
+  - wget
   - gcc
   - make
   - cmake
