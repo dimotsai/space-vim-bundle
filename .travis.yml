@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+- docker
+
+arch:
+  repos:
+  - papyros=http://dash.papyros.io/repos/$repo/$arch
+  packages:
+  - gcc
+  - make
+  - cmake
+  - patchelf
+  - lib32-gcc-libs
+  - ncurses
+  - ncurse5-compat-libs
+  script:
+  - "make"
+
+script:
+- "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
