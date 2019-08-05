@@ -5,7 +5,7 @@ services:
 
 arch:
   repos:
-  - papyros=http://dash.papyros.io/repos/$repo/$arch
+  - archlinuxfr=http://repo.archlinux.fr/$arch
   packages:
   - wget
   - gcc
