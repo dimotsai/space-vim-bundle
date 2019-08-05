@@ -1,8 +1,8 @@
-
 ARCH ?= x86_64
 APPIMAGE_DIR = appimages
 OUTDIR = output
 CURDIR = $(shell pwd)
+OUTPATH = $(CURDIR)/$(OUTDIR)
 
 APPSPATH=$(CURDIR)/$(OUTDIR)/.apps
 APPIMAGETOOL=$(APPSPATH)/appimagetool-x86_64.AppImage
@@ -15,7 +15,7 @@ HOMEDIR=../$(OUTDIR)
 
 APPS=$(BIN:%=$(APPSPATH)/%-$(ARCH).AppImage)
 
-.PHONY: all clean home home-clean $(BIN) $(BIN_CLEAN)
+.PHONY: all clean test home home-clean $(BIN) $(BIN_CLEAN)
 
 export ARCH
 export APPIMAGETOOL
@@ -27,14 +27,17 @@ all: $(BIN) $(HOMETAR)
 clean: $(BIN_CLEAN) $(HOMETAR)-clean $(APPIMAGETOOL)-clean
 
 $(BIN): %: $(APPSPATH)/%-$(ARCH).AppImage
+	rm -rf $(APPSPATH)
 
 $(BIN_CLEAN): %-clean: $(APPSPATH)/%-$(ARCH).AppImage-clean
-	rm -rf $(APPSPATH)
 	rm -rf $(OUTDIR)
 
 home: $(HOMETAR)
 
 home-clean: $(HOMETAR)-clean
+
+test: home
+	$(MAKE) -C home test
 
 # real targets
 #
