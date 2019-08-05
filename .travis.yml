@@ -14,7 +14,7 @@ arch:
   - patchelf
   - lib32-gcc-libs
   - ncurses
-  - ncurse5-compat-libs
+  - ncurses5-compat-libs
   script:
   - "make"
 
