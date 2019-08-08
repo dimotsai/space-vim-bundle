@@ -2,18 +2,20 @@
 
 HOMEDIR   ?= output
 HOMEPATH   = $(shell realpath $(HOMEDIR))
-LOCALDIR   = .local
+LOCALDIR   = usr
 LOCALPATH  = $(HOMEPATH)/$(LOCALDIR)
 APPSPATH  ?= $(shell pwd)/apps
+TESTPATH   = $(shell realpath test)
 
-PRODUCTS   = .cache .config .fzf go .LfCache .local .space-vim .spacevim .vim
+PRODUCTS   = .cache .config .fzf go .LfCache $(LOCALDIR) .space-vim .spacevim .vim
 BASH      := $(shell which bash)
-ENVRUN    := env - HOME=$(HOMEPATH) $(BASH) --noprofile --norc -l
+ENVRUN    := env - HOME=$(HOMEPATH) LOCALPATH=$(LOCALPATH) $(BASH) --noprofile --norc -l
 SHELL     := $(BASH)
 
 build:
 	mkdir -p $(LOCALPATH)/bin
-	cp template/.spacevim $(HOMEPATH)/.spacevim
+	cp template/init.* $(HOMEPATH)
+	cp template/install.sh $(HOMEPATH)
 	for bin in $(APPSPATH)/*; do \
 		ln -sf $$(realpath --relative-to=$(LOCALPATH)/bin $$bin) $(LOCALPATH)/bin/$$(basename $${bin%%-$(ARCH).AppImage}); \
 	done
@@ -37,4 +39,7 @@ clean:
 	rm -rf $(addprefix $(HOMEPATH)/,$(PRODUCTS))
 
 test:
-	env - HOME=$(HOMEPATH) TERM=$$TERM PATH=$(HOMEPATH)/.local/bin:$$PATH bash -l
+	mkdir -p $(TESTPATH)
+	ln -sf $(HOMEPATH) $(TESTPATH)/output
+	env - HOME=$(TESTPATH) TERM=$$TERM bash -l
+	rm -rf $(TESTPATH)

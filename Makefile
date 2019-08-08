@@ -4,7 +4,7 @@ OUTDIR = output
 CURDIR = $(shell pwd)
 OUTPATH = $(CURDIR)/$(OUTDIR)
 
-APPSPATH=$(CURDIR)/$(OUTDIR)/.apps
+APPSPATH=$(CURDIR)/$(OUTDIR)/apps
 APPIMAGETOOL=$(APPSPATH)/appimagetool-x86_64.AppImage
 APPIMAGETOOL_URL=https://github.com/AppImage/AppImageKit/releases/download/12/appimagetool-x86_64.AppImage
 
