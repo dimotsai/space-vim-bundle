@@ -33,6 +33,7 @@ curl -fLo $XDG_DATA_HOME/nvim/site/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "call plug#begin('~/vim/plugged')" > $PLUGS_VIM
 python3 ./plug-parser.py $(find ~/space-vim/layers -name 'packages.vim') >> $PLUGS_VIM
+cat ./extra.vim >> $PLUGS_VIM
 echo "call plug#end()" >> $PLUGS_VIM
 nvim -u $PLUGS_VIM +'set nomore' +'PlugInstall' +qall
 

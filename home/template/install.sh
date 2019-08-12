@@ -41,7 +41,7 @@ mkdir -p $HOME/.local/lib/python3.7/site-packages
 echo "$BUNDLE/usr/lib/python3.7/site-packages" > $HOME/.local/lib/python3.7/site-packages/space-vim-bundle.pth
 
 # install vim-plug
-copy_file $BUNDLE/usr/share/nvim/autoload/plug.vim ~/.local/share/site/nvim/autoload/plug.vim
+copy_file $BUNDLE/usr/share/nvim/site/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
 
 # install .fzf
 make_link $BUNDLE/.fzf ~/.fzf
