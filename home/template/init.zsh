@@ -1,6 +1,6 @@
 #!/usr/env/bin zsh
 
-BUNDLE="${0:a:p}"
+BUNDLE="${0:a:h}"
 
 prepend_path() {
   local VAR=$1
