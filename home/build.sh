@@ -2,15 +2,22 @@
 set -ex
 
 export PATH=$LOCALPATH/bin:$PATH
-export PYTHONPATH=$LOCALPATH/lib/python3.7/site-packages
+export PYTHONUSERBASE=$LOCALPATH
 export XDG_DATA_HOME=$LOCALPATH/share
 
 PLUGS_VIM=~/plugs.vim
 
+function pip_install()
+{
+  local package=$1
+  python3 -m pip install --user $package
+  # --install-option="--install-scripts=$LOCALPATH/bin"
+}
+
 # install python dependecies
-python3 -m pip install --target $PYTHONPATH pynvim
-python3 -m pip install --target $PYTHONPATH python-language-server[all]
-python3 -m pip install --target $PYTHONPATH lark-parser
+pip_install pynvim
+pip_install python-language-server[all]
+pip_install lark-parser
 # fix shebangs of python scripts
 for exe in $(ls "$LOCALPATH/bin/"*); do
     if [[ -f "$exe" ]] && [[ -x "$exe" ]] && [[ ! -L "$exe" ]]; then
