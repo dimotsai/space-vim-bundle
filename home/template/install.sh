@@ -36,6 +36,9 @@ copy_file() {
   fi
 }
 
+# install python packages
+mkdir -p $HOME/.local/lib/python3.7/site-packages
+echo "$BUNDLE/usr/lib/python3.7/site-packages" > $HOME/.local/lib/python3.7/site-packages/space-vim-bundle.pth
 
 # install vim-plug
 copy_file $BUNDLE/usr/share/nvim/autoload/plug.vim ~/.local/share/site/nvim/autoload/plug.vim
@@ -50,6 +53,9 @@ make_link $BUNDLE/space-vim ~/.space-vim
 make_link $BUNDLE/space-vim/init.vim ~/.config/nvim/init.vim
 
 # install .spacevim
-copy_file $BUNDLE/space-vim/init.spacevim ~/.spacevim
+if ! [[ -f ~/.spacevim ]]; then
+  copy_file $BUNDLE/space-vim/init.spacevim ~/.spacevim
+fi
 # patch plug home patch
 sed -i -E "s|(let\s+g:spacevim_plug_home\s*=\s*)(.*)|\" $(date +%Y%m%d_%s):\2\n\1'$BUNDLE/vim/plugged'|" ~/.spacevim
+echo -e "patched ~/.spacevim"
