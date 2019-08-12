@@ -13,4 +13,4 @@ prepend_path() {
 }
 
 prepend_path  PATH        $BUNDLE/usr/bin
-prepend_path  PYTHONPATH  $BUNDLE/usr/lib/python3.7/site-packages
+prepend_path  PYTHONPATH  $BUNDLE/usr/lib/python3.7
