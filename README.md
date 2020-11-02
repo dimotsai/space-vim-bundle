@@ -1,15 +1,15 @@
 [![Build Status](https://travis-ci.org/dimotsai/space-vim.bundle.svg?branch=master)](https://travis-ci.org/dimotsai/space-vim.bundle)
 
-This project would build all essential packages for space-vim and pack them
-as a standalone tarball that could be installed offline.
+This project builds all essential packages for space-vim and pack them
+together as one single standalone executable that can be installed without internet.
 
 Included Packages
 -----------------
 
-1. neovim 0.3.8
-2. ccls 0.20190314.1
-3. bear 2.4.0
-4. python 3.7.3
+1. neovim 0.4.4
+2. ccls 0.20201025
+3. bear 2.4.3
+4. python 3.9.0
 5. space-vim master
 6. all plugins in space-vim layers
 
@@ -24,3 +24,6 @@ Build Requirements
 5. lib32-gcc-libs
 6. ncurses
 7. ncurse5-compat-libs (AUR)
+
+### Ubuntu
+See .travis

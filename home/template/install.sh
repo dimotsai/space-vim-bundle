@@ -5,12 +5,12 @@ BUNDLE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 backup() {
   if [ -e "$1" ]; then
     echo
-    echo -e "\\033[1;34m==>\\033[0m Attempting to back up your $1"
+    echo -e "\\033[1;34m==>\\033[0m Attempting to back up $1"
     today=$(date +%Y%m%d_%s)
     mv -v "$1" "$1.$today"
 
     ret="$?"
-    echo -e "Your $1 has been backed up"
+    echo -e "$1 has been backed up"
   fi
 }
 
@@ -36,10 +36,6 @@ copy_file() {
   fi
 }
 
-# install python packages
-mkdir -p $HOME/.local/lib/python3.7/site-packages
-echo "$BUNDLE/usr/lib/python3.7/site-packages" > $HOME/.local/lib/python3.7/site-packages/space-vim-bundle.pth
-
 # install vim-plug
 copy_file $BUNDLE/usr/share/nvim/site/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
 
@@ -58,4 +54,4 @@ if ! [[ -f ~/.spacevim ]]; then
 fi
 # patch plug home patch
 sed -i -E "s|(let\s+g:spacevim_plug_home\s*=\s*)(.*)|\" $(date +%Y%m%d_%s):\2\n\1'$BUNDLE/vim/plugged'|" ~/.spacevim
-echo -e "patched ~/.spacevim"
+echo -e "~/.spacevim has been patched."

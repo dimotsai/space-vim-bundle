@@ -16,8 +16,8 @@ build:
 	mkdir -p $(LOCALPATH)/bin
 	cp template/init.* $(HOMEPATH)
 	cp template/install.sh $(HOMEPATH)
-	for bin in $(APPSPATH)/*; do \
-		ln -sf $$(realpath --relative-to=$(LOCALPATH)/bin $$bin) $(LOCALPATH)/bin/$$(basename $${bin%%-$(ARCH).AppImage}); \
+	for bin in $(APPSPATH)/*/usr/bin/*; do \
+		ln -sf $$(realpath --relative-to=$(LOCALPATH)/bin $$bin) $(LOCALPATH)/bin/$$(basename $$bin); \
 	done
 	$(ENVRUN) ./build.sh
 	for patch in $$(ls patches/*.patch.sh); do \
@@ -40,6 +40,6 @@ clean:
 
 test:
 	mkdir -p $(TESTPATH)
-	ln -sf $(HOMEPATH) $(TESTPATH)/output
+	cp -r $(HOMEPATH) $(TESTPATH)/space-vim-bundle
 	env - HOME=$(TESTPATH) TERM=$$TERM bash -l
 	rm -rf $(TESTPATH)

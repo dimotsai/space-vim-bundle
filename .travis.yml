@@ -33,17 +33,14 @@ before_install:
   - sudo apt install -y libncurses-dev
   - sudo apt install -y zlib1g-dev
   - sudo apt install -y golang-go
-  # - sudo apt install -y python3
-  # - sudo apt install -y python3-pip
-  # - sudo pip3 install lark-parser
 
 script:
   - "make"
 
 after_success:
-  - ls -lh space-vim.tar.gz
+  - ls -lh space-vim-bundle.tar.gz
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh space-vim.tar.gz
+  - bash upload.sh space-vim-bundle.tar.gz
 
 branches:
   except:
