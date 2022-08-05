@@ -13,7 +13,7 @@ HOMEDIR=../$(OUTDIR)
 
 APPS=$(BIN:%=$(APPSPATH)/%-$(ARCH).AppImage)
 
-.PHONY: all clean test home home-clean $(BIN) $(BIN_CLEAN)
+.PHONY: all clean test home home-clean $(BIN) $(BIN_CLEAN) docker
 
 export ARCH
 export HOMEDIR
@@ -47,3 +47,7 @@ $(HOMETAR):
 $(HOMETAR)-clean:
 	$(MAKE) -C home clean
 	rm -f $(HOMETAR)
+
+docker:
+	docker build -t space-vim-bundle .
+	docker run -it --rm --mount type=bind,source="$$(pwd)",target=/app -u $$(id -u):$$(id -g) space-vim-bundle

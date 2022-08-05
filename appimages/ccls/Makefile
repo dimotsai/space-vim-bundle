@@ -1,7 +1,7 @@
 .PHONY: fetch build release clean
 
 NAME=ccls
-VERSION=0.20201025
+VERSION=0.20210330
 ARCH ?= x86_64
 SHELL:=/bin/bash
 DEST ?= install

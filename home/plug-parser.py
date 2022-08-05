@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import os
-from lark import Lark, Transformer
+import logging
+from lark import Lark, Transformer, logger
+
+logger.setLevel(logging.DEBUG)
 
 PLUG_GRAMMAR = r"""
   ?start: plug_list
@@ -74,6 +77,8 @@ class TreeToVimL(Transformer):
         return "{ %s }" % ', '.join(items)
 
     def list(self, items):
+        if items[0] == None:
+            return "[]"
         return "[%s]" % ', '.join(items)
 
     def pair(self, items):
@@ -103,12 +108,13 @@ class TreeToVimL(Transformer):
 def main(argv=None):
     argv = argv or []
     pathes = argv[1:]
-    parser = Lark(PLUG_GRAMMAR, parser='lalr')
+    parser = Lark(PLUG_GRAMMAR, parser='lalr', debug=True)
     transformer = TreeToVimL()
     if pathes:
         for path in pathes:
             with open(path) as file:
                 tree = parser.parse(file.read())
+                #  print(tree.pretty())
                 result = transformer.transform(tree)
                 print(result)
                 #  print(tree.pretty())

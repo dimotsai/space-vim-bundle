@@ -20,14 +20,14 @@ build:
 		ln -sf $$(realpath --relative-to=$(LOCALPATH)/bin $$bin) $(LOCALPATH)/bin/$$(basename $$bin); \
 	done
 	$(ENVRUN) ./build.sh
-	for patch in $$(ls patches/*.patch.sh); do \
+	for patch in $$(ls patches); do \
 		$(ENVRUN) $$patch; \
 	done
 	# make sure every symlink is relative path
 	for l in $$(find $(HOMEPATH) -type l); do \
 		f=$$(readlink $$l); \
 		if [[ "$$f" = /* ]]; then \
-			echo "$$f is an absolute path"; exit 1; \
+			echo "$$l is an absolute path"; exit 1; \
 		fi; \
 	done
 

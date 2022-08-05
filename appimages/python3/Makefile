@@ -1,11 +1,11 @@
 .PHONY: fetch build release clean
 
 NAME=python
-VERSION=3.9.0
+VERSION=3.9.13
 ARCH ?= x86_64
 DEST ?= install
 
-APPURL=https://github.com/niess/python-appimage/releases/download/python3.9/python3.9.0-cp39-cp39-manylinux1_$(ARCH).AppImage
+APPURL=https://github.com/niess/python-appimage/releases/download/python3.9/python$(VERSION)-cp39-cp39-manylinux2014_$(ARCH).AppImage
 APPIMG=$(NAME)-$(ARCH).AppImage
 APPDIR=$(DEST)/$(NAME)-$(VERSION)
 
